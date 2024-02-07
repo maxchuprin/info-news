@@ -15,15 +15,10 @@ import (
 type config struct {
 	URLS   []string `json:"rss"`
 	Period int      `json:"request_period"`
+	DbUrl  string   `json:"db_url"`
 }
 
 func main() {
-
-	db, err := storage.InitDB()
-	if err != nil {
-		log.Fatal(err)
-	}
-	api := api.New(db)
 
 	// чтение и раскодирование файла конфигурации
 	b, err := ioutil.ReadFile("cmd/gonews/config.json")
@@ -35,6 +30,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	db, err := storage.InitDB(config.DbUrl)
+	if err != nil {
+		log.Fatal(err)
+	}
+	api := api.New(db)
 
 	// запуск парсинга новостей в отдельном потоке
 	// для каждой ссылки

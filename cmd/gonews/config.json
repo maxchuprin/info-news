@@ -4,5 +4,6 @@
       "https://habr.com/ru/rss/best/daily/?fl=ru",
       "https://cprss.s3.amazonaws.com/golangweekly.com.xml"
    ],
-   "request_period": 1
+   "request_period": 1,
+   "db_url": "postgres://postgres:postgres@localhost:5432/postgres"
 }

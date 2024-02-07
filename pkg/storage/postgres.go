@@ -17,9 +17,8 @@ type Post struct {
 	Link    string // ссылка на источник
 }
 
-func InitDB() (*DB, error) {
-	connstr := "postgres://postgres:postgres@localhost:5432/postgres"
-	pool, err := pgxpool.Connect(context.Background(), connstr)
+func InitDB(dbUrl string) (*DB, error) {
+	pool, err := pgxpool.Connect(context.Background(), dbUrl)
 	if err != nil {
 		return nil, err
 	}
